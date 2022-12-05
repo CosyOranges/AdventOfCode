@@ -1,47 +1,86 @@
 package day01
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
+	"io/ioutil"
+	"sort"
+	"strings"
 
 	"github.com/CosyOranges/AdventOfCode/src/utils"
+	"github.com/spf13/cast"
 )
 
-// Main function to take input from a .txt file
-func Day_01() {
-	readFile, err := os.Open(utils.GetHomeDir() + "/AOC/data/2022/day01/input.txt")
+// variable to assign the input to
+var in string
 
-	// If we can open the file successfully then read it line by line
+func transformInput() (ans [][]int) {
+	// read the entire file & return the byte slice as a string
+	content, err := ioutil.ReadFile(utils.GetHomeDir() + "/AOC/data/2022/day01/input.txt") // TODO: Tidy up this side of things
 	if err != nil {
-		fmt.Println("Error: ", err)
+		panic(err)
+	}
+	// trim off new lines and tabs at end of input files
+	strContent := string(content)
+
+	in = strings.TrimRight(strContent, "\n")
+	if len(in) == 0 {
+		panic("Empty input!")
 	}
 
-	fileScanner := bufio.NewScanner(readFile)
+	for _, group := range strings.Split(in, "\n\n") {
+		row := []int{}
+		for _, line := range strings.Split(group, "\n") {
+			row = append(row, cast.ToInt(line))
+		}
+		ans = append(ans, row)
+	}
 
-	fileScanner.Split(bufio.ScanLines)
+	return ans
+}
 
-	var sum int = 0
+// Main function to take input from a .txt file
+func Day01Part1() {
+	elves := transformInput()
 
-	var ans int = 0
+	ans := 0
 
-	for fileScanner.Scan() {
-		line := fileScanner.Text()
-
-		if len(line) == 0 {
-			if sum > ans {
-				ans = sum
-			}
-
-			sum = 0
+	for _, line := range elves {
+		// TODO: Factor this out into a simple maths module
+		sum := 0
+		for _, elf := range line {
+			sum += elf
 		}
 
-		tmp, _ := strconv.Atoi(line)
-		sum += tmp
+		if sum > ans {
+			ans = sum
+		}
+	}
+	fmt.Println("The Elf with the most calories is: ", ans)
+}
+
+func Day01Part2() {
+	elves := transformInput()
+
+	totals := []int{}
+
+	// Create array of totals per elf
+	for _, line := range elves {
+		// TODO: Factor this out into a simple maths module
+		sum := 0
+		for _, elf := range line {
+			sum += elf
+		}
+		totals = append(totals, sum)
 	}
 
-	readFile.Close()
+	// sort the totals
+	sort.Ints(totals)
 
-	fmt.Println("The most calories held by an elf is: ", ans)
+	// extract the top three as a sum
+	ans := 0
+	for i := 0; i < 3; i++ {
+		ans += totals[len(totals)-1-i]
+	}
+
+	fmt.Println("The total for the top three elves is: ", ans)
 }
