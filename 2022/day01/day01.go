@@ -6,6 +6,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/CosyOranges/AdventOfCode/src/maths"
 	"github.com/CosyOranges/AdventOfCode/src/utils"
 	"github.com/spf13/cast"
 )
@@ -46,10 +47,7 @@ func Day01Part1() {
 
 	for _, line := range elves {
 		// TODO: Factor this out into a simple maths module
-		sum := 0
-		for _, elf := range line {
-			sum += elf
-		}
+		sum := maths.SumIntSlice(line)
 
 		if sum > ans {
 			ans = sum
@@ -66,10 +64,7 @@ func Day01Part2() {
 	// Create array of totals per elf
 	for _, line := range elves {
 		// TODO: Factor this out into a simple maths module
-		sum := 0
-		for _, elf := range line {
-			sum += elf
-		}
+		sum := maths.SumIntSlice(line)
 		totals = append(totals, sum)
 	}
 

@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/CosyOranges/AdventOfCode/2022/day01"
+	"github.com/CosyOranges/AdventOfCode/2022/day02"
 	"github.com/CosyOranges/AdventOfCode/src/parse"
 	"github.com/CosyOranges/AdventOfCode/src/utils"
 )
@@ -28,6 +29,11 @@ func main() {
 			answerPrinter(day)
 			day01.Day01Part1()
 			day01.Day01Part2()
+		}
+	case 2:
+		{
+			answerPrinter(day)
+			day02.Day02Part1()
 		}
 	}
 
