@@ -34,6 +34,7 @@ func main() {
 		{
 			answerPrinter(day)
 			day02.Day02Part1()
+			day02.Day02Part2()
 		}
 	}
 

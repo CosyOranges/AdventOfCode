@@ -120,5 +120,77 @@ func Day02Part1() {
 		}
 	}
 
-	fmt.Printf("You would have won: %d points\n", score)
+	fmt.Printf("PART 1: You would have won: %d points\n", score)
+}
+
+func Day02Part2() {
+	games := transformInput()
+
+	choices := map[string]int{
+		"X": Loss,
+		"Y": Draw,
+		"Z": Win,
+	}
+
+	score := 0
+
+	for _, l := range games {
+		score += choices[l[1]]
+
+		switch l[1] {
+		case "X":
+			{
+				switch l[0] {
+				case "A":
+					{
+						score += Scissors
+					}
+				case "B":
+					{
+						score += Rock
+					}
+				case "C":
+					{
+						score += Paper
+					}
+				}
+			}
+		case "Y":
+			{
+				switch l[0] {
+				case "A":
+					{
+						score += Rock
+					}
+				case "B":
+					{
+						score += Paper
+					}
+				case "C":
+					{
+						score += Scissors
+					}
+				}
+			}
+		case "Z":
+			{
+				switch l[0] {
+				case "A":
+					{
+						score += Paper
+					}
+				case "B":
+					{
+						score += Scissors
+					}
+				case "C":
+					{
+						score += Rock
+					}
+				}
+			}
+		}
+	}
+
+	fmt.Printf("PART 2: You would have won: %d points\n", score)
 }
