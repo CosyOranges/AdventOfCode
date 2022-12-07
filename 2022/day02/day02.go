@@ -2,7 +2,6 @@ package day02
 
 import (
 	"fmt"
-	"io/ioutil"
 	"strings"
 
 	"github.com/CosyOranges/AdventOfCode/src/utils"
@@ -35,15 +34,7 @@ func match(p1 string, p2 string) int {
 }
 
 func transformInput() [][]string {
-	// read the entire file & return the byte slice as a string
-	content, err := ioutil.ReadFile(utils.GetHomeDir() + "/AOC/data/2022/day02/input.txt") // TODO: Tidy up this side of things
-	if err != nil {
-		panic(err)
-	}
-	// trim off new lines and tabs at end of input files
-	strContent := string(content)
-	interim := strings.TrimRight(strContent, "\n")
-	in = strings.TrimRight(interim, "\n")
+	in = strings.TrimRight(utils.ReadInputFile("02"), "\n")
 	if len(in) == 0 {
 		panic("Empty input!")
 	}

@@ -2,7 +2,6 @@ package day01
 
 import (
 	"fmt"
-	"io/ioutil"
 	"sort"
 	"strings"
 
@@ -15,19 +14,13 @@ import (
 var in string
 
 func transformInput() (ans [][]int) {
-	// read the entire file & return the byte slice as a string
-	content, err := ioutil.ReadFile(utils.GetHomeDir() + "/AOC/data/2022/day01/input.txt") // TODO: Tidy up this side of things
-	if err != nil {
-		panic(err)
-	}
-	// trim off new lines and tabs at end of input files
-	strContent := string(content)
-
-	in = strings.TrimRight(strContent, "\n")
+	in = utils.ReadInputFile("01")
 	if len(in) == 0 {
 		panic("Empty input!")
 	}
 
+	// We need to split initially on "\n\n" because elves are sperarated from the next
+	// by an empty line
 	for _, group := range strings.Split(in, "\n\n") {
 		row := []int{}
 		for _, line := range strings.Split(group, "\n") {

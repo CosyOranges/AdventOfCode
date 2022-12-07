@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -47,4 +48,20 @@ func WriteToFile(filename string, content []byte) {
 	if err != nil {
 		log.Fatalf("Error writing file: %s", err)
 	}
+}
+
+/*
+Fetch the input for a task as a string from the file.
+Seperated by lines.
+*/
+func ReadInputFile(day string) string {
+	// read the entire file & return the byte slice as a string
+	content, err := ioutil.ReadFile(GetHomeDir() + "/AOC/data/2022/day" + day + "/input.txt") // TODO: Tidy up this side of things
+	if err != nil {
+		panic(err)
+	}
+	// trim off new lines and tabs at end of input files
+	strContent := string(content)
+
+	return strContent
 }

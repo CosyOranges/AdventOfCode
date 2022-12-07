@@ -6,6 +6,7 @@ import (
 
 	"github.com/CosyOranges/AdventOfCode/2022/day01"
 	"github.com/CosyOranges/AdventOfCode/2022/day02"
+	"github.com/CosyOranges/AdventOfCode/2022/day03"
 	"github.com/CosyOranges/AdventOfCode/src/parse"
 	"github.com/CosyOranges/AdventOfCode/src/utils"
 )
@@ -15,14 +16,14 @@ func answerPrinter(day int) {
 }
 
 func main() {
-	fmt.Println("Welcome to the Advent of Code!")
+	fmt.Println("----------------------------------\n| Welcome to the Advent of Code! |\n----------------------------------")
 
 	day, year, aoc_cookie := parse.Parser()
 	utils.GetInput(day, year, aoc_cookie)
 
 	// Using a switch case here for the day...
 	// Is this the best idea? 25 days... kinda repetitive...
-	// TODO: Scope out a better way to solve this?
+	// TODO: Scope out a better way to solve this? because this becomes ridiculous across multiple years...
 	switch day {
 	case 1:
 		{
@@ -35,6 +36,11 @@ func main() {
 			answerPrinter(day)
 			day02.Day02Part1()
 			day02.Day02Part2()
+		}
+	case 3:
+		{
+			answerPrinter(day)
+			day03.Day03Part1()
 		}
 	}
 
